@@ -1,13 +1,13 @@
 # Usa una imagen de PHP con Apache preinstalado
 FROM php:8.1-apache
 
-# Instalar extensiones necesarias para Dolibarr
+# Instalar extensiones necesarias para Dolibarr y asegurar que Apache está instalado
 RUN apt-get update && apt-get install -y \
-    libpng-dev libjpeg-dev libfreetype6-dev libzip-dev unzip \
+    apache2 libpng-dev libjpeg-dev libfreetype6-dev libzip-dev unzip \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd pdo pdo_mysql mysqli zip
 
-# Copiar los archivos de Dolibarr
+# Copiar los archivos de Dolibarr al directorio correcto de Apache
 COPY . /var/www/html/
 
 # Ajustar permisos para Apache
