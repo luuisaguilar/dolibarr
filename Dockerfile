@@ -16,5 +16,5 @@ RUN chmod -R 755 /var/www/html/
 # Exponer el puerto correcto para Railway
 EXPOSE 8080
 
-# Verificar que Apache está instalado antes de ejecutarlo
-CMD ["sh", "-c", "which apache2-foreground && apache2-foreground"]
+# Iniciar Apache en primer plano
+CMD ["apache2ctl", "-D", "FOREGROUND"]
